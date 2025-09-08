@@ -128,344 +128,392 @@
   </div>
 
   <script>
-  // -------- Topic data: What • Why • How • Steps • Real world • FAQ --------
-  const topics = [
-    {
-      id:'cloud-foundations', domain:'cloud', title:'Cloud computing fundamentals',
-      what:`Cloud computing lets you rent IT resources (compute, storage, networking) from a provider over the internet on a pay‑as‑you‑go model.`,
-      why:[
-        'Reduce upfront costs (shift CapEx → OpEx).',
-        'Scale up/down quickly; experiment faster.',
-        'Increase resilience using multiple zones/regions.'
-      ],
-      how:[
-        'Choose the right model: IaaS (you manage VMs), PaaS (provider manages runtime), SaaS (complete app).',
-        'Pick a deployment model: public, private, or hybrid; many orgs use hybrid for gradual migration.',
-        'Understand shared responsibility: more provider responsibility as you move from IaaS → PaaS → SaaS.'
-      ],
-      steps:[
-        {label:'Try billing safe: free sandbox', portal:[
-          'Create a free Azure account or use a sponsored subscription.',
-          'In Cost Management, set a budget alert (e.g., \'₹500\').'
-        ]}
-      ],
-      real:[
-        'Startups iterate quickly using App Service (PaaS) instead of provisioning VMs.',
-        'Enterprises extend on‑prem AD with Entra ID and connect sites with VPN/ExpressRoute (hybrid).'
-      ],
-      faqs:[
-        ['What is consumption‑based pricing?','You pay only for what you use; many services also offer free tiers.'],
-        ['When to prefer PaaS over IaaS?','When you want the provider to manage OS patches, scaling, and runtime so you focus on code.']
-      ]
-    },
+/* ---------- Topic data (What / Why / How / Steps / Real-world / FAQs) ---------- */
+const topics = [
+  {
+    id: "cloud-foundations",
+    domain: "cloud",
+    title: "Cloud computing fundamentals",
+    what: "Cloud computing lets you rent IT resources over the internet on pay-as-you-go.",
+    why: [
+      "Reduce upfront costs (CapEx -> OpEx).",
+      "Scale up/down quickly and experiment faster.",
+      "Improve resilience using zones/regions."
+    ],
+    how: [
+      "Pick a model: IaaS (you manage OS), PaaS (provider manages runtime), SaaS (finished app).",
+      "Pick deployment: public, private, or hybrid.",
+      "Understand shared responsibility across IaaS/PaaS/SaaS."
+    ],
+    steps: [
+      {
+        label: "Set a safe budget",
+        portal: [
+          "Portal -> Cost Management -> Budgets -> Add -> e.g., ₹500 monthly.",
+          "Enable email alert at 80%."
+        ]
+      }
+    ],
+    real: [
+      "Startups ship faster with App Service instead of managing VMs.",
+      "Enterprises extend on-prem to Azure via VPN/ExpressRoute (hybrid)."
+    ],
+    faqs: [
+      ["What is consumption-based pricing?","You pay only for what you use."],
+      ["When prefer PaaS?","When you want less OS/runtime maintenance and faster delivery."]
+    ]
+  },
 
-    { id:'global-infra', domain:'arch', title:'Azure global infrastructure',
-      what:'Azure is organized into regions (datacenter locations) grouped into geographies; many regions have three Availability Zones; every region has a pair for disaster recovery.',
-      why:['Pick regions close to users to reduce latency.','Use zone and region redundancy for high availability.','Meet data residency requirements.'],
-      how:[
-        'Deploy resources into a region (e.g., East US, Central India).',
-        'For HA: use zones within a region; for DR: use region pairs.'
-      ],
-      steps:[
-        {label:'Create a resource group in your region', portal:[
-          'Portal → Resource groups → Create → Name: rg-az900-demo → Region: India Central (or nearest).',
-          'Review + create.'
-        ], cli:[
-          'az group create -n rg-az900-demo -l centralindia'
-        ]}
-      ],
-      real:['Design apps for zone failure (multi-zone LB + VMSS) and regional DR (geo‑redundant storage, backups).'],
-      faqs:[
-        ['What is a region pair?','Two regions in the same geography paired for prioritized recovery and updates.']
-      ]
-    },
+  {
+    id: "global-infra",
+    domain: "arch",
+    title: "Azure global infrastructure",
+    what: "Azure has regions, availability zones inside many regions, and region pairs for DR.",
+    why: [
+      "Pick regions close to users for lower latency.",
+      "Use zones for HA; region pairs for DR.",
+      "Meet data residency requirements."
+    ],
+    how: [
+      "Deploy resources into a specific region (e.g., Central India).",
+      "Design for zone failure and plan regional DR."
+    ],
+    steps: [
+      {
+        label: "Create a resource group",
+        portal: [
+          "Portal -> Resource groups -> Create -> Name: rg-az900-demo -> Region: Central India.",
+          "Review + Create."
+        ]
+      }
+    ],
+    real: [
+      "Critical apps spread across zones with load balancers; backups target paired region."
+    ],
+    faqs: [
+      ["What is a region pair?","Two regions in the same geography paired for prioritized recovery/updates."]
+    ]
+  },
 
-    { id:'compute', domain:'arch', title:'Compute options (VMs, App Service, Functions, AKS, ACI)',
-      what:'Azure offers multiple ways to run code: IaaS VMs/VMSS, PaaS App Service, serverless Functions, containers (ACI) and orchestration (AKS).',
-      why:['Match control vs. convenience: VMs give control; PaaS reduces ops; serverless scales to zero.','Cost efficiency and faster time to market.'],
-      how:[
-        'Web apps: prefer App Service (PaaS).','Event‑driven jobs: use Functions.','Lift‑and‑shift or custom OS needs: VMs/VMSS.','Containers needing orchestration: AKS; simple one‑off containers: ACI.'
-      ],
-      steps:[
-        {label:'Deploy a sample web app (PaaS)', portal:[
-          'Portal → App Services → Create → Publish: Code → Runtime: .NET/Node → Region: same as RG.',
-          'Create a new App Service plan (B1 for low cost).',
-          'Review + create → Browse site.'
-        ], cli:[
-          'az webapp up -n az900-demo-web -g rg-az900-demo -l centralindia'
-        ]},
-        {label:'Create a VM (IaaS)', portal:[
-          'Portal → Virtual machines → Create → Size: small → Inbound ports: allow 22/3389 only if needed.',
-          'Enable just‑in‑time (Defender) and use NSG rules for access.'
-        ]}
-      ],
-      real:['Prod sites often start on App Service; heavy customization or Windows legacy apps might need VMs.'],
-      faqs:[
-        ['When to choose AKS for AZ‑900?','Only recognize it at a high level—AKS is for container orchestration at scale.']
-      ]
-    },
+  {
+    id: "compute",
+    domain: "arch",
+    title: "Compute options (VMs, App Service, Functions, AKS, ACI)",
+    what: "Run code via VMs (IaaS), App Service (PaaS), Functions (serverless), containers (ACI) or AKS (orchestration).",
+    why: [
+      "Balance control vs convenience.",
+      "Optimize cost and time to market."
+    ],
+    how: [
+      "Web apps: App Service.",
+      "Event-driven jobs: Functions.",
+      "Custom OS or lift-and-shift: VMs/VMSS.",
+      "Container orchestration: AKS; simple one-off: ACI."
+    ],
+    steps: [
+      {
+        label: "Deploy a sample web app (Portal, PaaS)",
+        portal: [
+          "Portal -> App Services -> Create -> Publish: Code -> Runtime: .NET/Node -> Region: same as RG.",
+          "Create a small App Service plan (B1).",
+          "Review + Create -> Browse site."
+        ]
+      }
+    ],
+    real: [
+      "Many production APIs run on App Service; legacy Windows apps often stay on VMs."
+    ],
+    faqs: [
+      ["When mention AKS in AZ-900?","Only at a high level—know it's for container orchestration."]
+    ]
+  },
 
-    { id:'networking', domain:'arch', title:'Networking basics (VNet, subnets, NSG, VPN, ExpressRoute)',
-      what:'A VNet is your private network in Azure. Subnets segment traffic. NSGs filter traffic. VPN Gateway connects on‑prem networks; ExpressRoute provides private dedicated connectivity.',
-      why:['Isolate workloads securely.','Connect cloud with on‑prem networks.','Control inbound/outbound traffic with NSG rules.'],
-      how:[
-        'Create a VNet with address space (e.g., 10.0.0.0/16) and subnets (web 10.0.1.0/24, data 10.0.2.0/24).','Attach NSGs with allow/deny rules.','Use Bastion/Jumpbox to avoid exposing RDP/SSH to internet.'
-      ],
-      steps:[
-        {label:'Create VNet + subnets + NSG (Portal)', portal:[
-          'Portal → Virtual networks → Create → Address space 10.0.0.0/16.',
-          'Add subnets: web 10.0.1.0/24, data 10.0.2.0/24.',
-          'Create an NSG → Add inbound rule: allow 443 from Internet to web subnet; deny 0.0.0.0/0 for 22/3389.'
-        ]}
-      ],
-      real:['Typical three‑tier app: LB → web subnet → app subnet → DB subnet with NSGs between tiers.'],
-      faqs:[['NSG vs Firewall?','NSG is subnet/VM level stateless filtering; Azure Firewall is a managed, stateful network security service.']]
-    },
+  {
+    id: "networking",
+    domain: "arch",
+    title: "Networking basics (VNet, subnets, NSG, VPN, ExpressRoute)",
+    what: "VNet is your private network; subnets segment it; NSGs filter traffic; VPN/ExpressRoute connect on-prem.",
+    why: [
+      "Isolate workloads securely.",
+      "Connect cloud with on-prem.",
+      "Control traffic with NSGs."
+    ],
+    how: [
+      "Create a VNet (10.0.0.0/16) with subnets (web: 10.0.1.0/24, data: 10.0.2.0/24).",
+      "Attach NSGs with allow/deny rules.",
+      "Use Bastion/Jumpbox; avoid exposing RDP/SSH to internet."
+    ],
+    steps: [
+      {
+        label: "Create VNet + subnets + NSG (Portal)",
+        portal: [
+          "Portal -> Virtual networks -> Create -> Address space 10.0.0.0/16.",
+          "Add subnets: web 10.0.1.0/24, data 10.0.2.0/24.",
+          "Create an NSG -> inbound: allow 443 to web subnet; block 22/3389 from Internet."
+        ]
+      }
+    ],
+    real: ["Classic 3-tier: LB -> web subnet -> app subnet -> DB subnet; NSGs filter between tiers."],
+    faqs: [["NSG vs Azure Firewall?","NSG = stateless rules at subnet/NIC; Firewall = managed, stateful firewall with advanced features."]]
+  },
 
-    { id:'storage', domain:'arch', title:'Storage & redundancy (Blob, File, Queue, Table; LRS/ZRS/GRS/GZRS)',
-      what:'Azure Storage offers multiple data types and redundancy options to protect data against failures.',
-      why:['Choose the right data type for apps (objects vs files vs messages vs NoSQL).','Pick redundancy to meet uptime/DR goals.'],
-      how:[
-        'Blob for unstructured data; File for SMB shares; Queue for decoupling; Table for key‑value NoSQL.',
-        'Redundancy: LRS (single zone), ZRS (multi‑zone), GRS/GZRS (geo‑replication).'
-      ],
-      steps:[
-        {label:'Create Storage account with ZRS', portal:[
-          'Portal → Storage accounts → Create → Redundancy: ZRS.',
-          'Create a container → Upload a file → Generate a SAS (time‑limited access).'
-        ], cli:[
-          'az storage account create -n az900stor$RANDOM -g rg-az900-demo -l centralindia --sku Standard_ZRS'
-        ]}
-      ],
-      real:['Media files in Blob with CDN; shared app configs on File shares; command queueing via Queue.'],
-      faqs:[['When pick GZRS?','When you need both zone and region protection with read‑access geo‑replication.']]
-    },
+  {
+    id: "storage",
+    domain: "arch",
+    title: "Storage & redundancy (Blob, File, Queue, Table; LRS/ZRS/GRS/GZRS)",
+    what: "Choose data type by need and redundancy by availability/DR goals.",
+    why: [
+      "Right fit for objects, files, messages, NoSQL.",
+      "Protection against zone/region failures."
+    ],
+    how: [
+      "Blob for objects; File for SMB shares; Queue for decoupling; Table for key-value NoSQL.",
+      "Redundancy: LRS (single zone), ZRS (multi-zone), GRS (geo), GZRS (geo+zone)."
+    ],
+    steps: [
+      {
+        label: "Create Storage account with ZRS",
+        portal: [
+          "Portal -> Storage accounts -> Create -> Redundancy: ZRS.",
+          "Create a container -> Upload a file -> Generate a time-limited SAS."
+        ]
+      }
+    ],
+    real: ["Blob + CDN for media; File shares for lift-and-shift; Queue for background jobs."],
+    faqs: [["When pick GZRS?","When you need both zone and region protection with read-access replica."]]
+  },
 
-    { id:'data-ai', domain:'arch', title:'Databases & analytics overview (Azure SQL, Cosmos DB, Synapse, ADF)',
-      what:'Fundamentals awareness of managed databases and analytics services.',
-      why:['Use fully‑managed services to reduce ops overhead.','Choose the right store for relational vs NoSQL vs analytics.'],
-      how:[
-        'Relational OLTP: Azure SQL Database or Managed Instance.',
-        'NoSQL, global distribution: Cosmos DB.',
-        'Analytics/warehouse: Synapse; Pipelines: Data Factory.'
-      ],
-      steps:[
-        {label:'Create Azure SQL Database (quickstart)', portal:[
-          'Portal → Azure SQL → Create SQL Database → Serverless tier for demos.',
-          'Set firewall to allow your client IP only; avoid public exposure.'
-        ]}
-      ],
-      real:['Multi‑region ecommerce uses Cosmos DB for product catalog; BI teams use Synapse + Power BI.'],
-      faqs:[['Cosmos DB consistency levels?','Eventual, Session, Consistent Prefix, Bounded Staleness, Strong (know at a high level).']]
-    },
+  {
+    id: "data-ai",
+    domain: "arch",
+    title: "Databases & analytics (Azure SQL, Cosmos DB, Synapse, Data Factory)",
+    what: "Fundamentals awareness of managed databases and analytics services.",
+    why: ["Reduce ops overhead", "Pick the right store for relational vs NoSQL vs analytics"],
+    how: [
+      "OLTP: Azure SQL DB/Managed Instance.",
+      "Global NoSQL: Cosmos DB.",
+      "Analytics: Synapse; Pipelines/ETL: Data Factory."
+    ],
+    steps: [
+      {
+        label: "Create an Azure SQL Database (Portal)",
+        portal: [
+          "Portal -> Azure SQL -> Create SQL Database -> Choose Serverless for demo.",
+          "Set firewall to allow only your client IP."
+        ]
+      }
+    ],
+    real: ["E-commerce catalogs use Cosmos DB; BI uses Synapse + Power BI."],
+    faqs: [["Cosmos DB consistency levels?","Eventual, Session, Consistent Prefix, Bounded Staleness, Strong (know high level)."]]
+  },
 
-    { id:'identity', domain:'gov', title:'Identity & access (Microsoft Entra ID, RBAC, service principals)',
-      what:'Entra ID (formerly Azure AD) is the identity backbone. RBAC controls who can do what on resources.',
-      why:['Centralize identity and SSO across apps.','Least privilege access and auditability.'],
-      how:[
-        'Create users/groups in the tenant; grant roles at subscription/resource group/resource scope.',
-        'Use service principals/managed identities for apps—avoid secrets in code.'
-      ],
-      steps:[
-        {label:'Assign Reader role at resource group scope', portal:[
-          'Portal → Resource groups → rg-az900-demo → Access control (IAM) → Add role assignment → Reader → Select user → Save.'
-        ], cli:['az role assignment create --assignee <userPrincipalName> --role Reader --scope $(az group show -n rg-az900-demo --query id -o tsv)']}
-      ],
-      real:['Deploy pipelines use managed identities to access Storage and Key Vault without embedded secrets.'],
-      faqs:[['RBAC vs Azure Policy?','RBAC answers WHO can do WHAT; Policy answers WHAT is allowed to exist/configure.']]
-    },
+  {
+    id: "identity",
+    domain: "gov",
+    title: "Identity & access (Microsoft Entra ID, RBAC, managed identities)",
+    what: "Entra ID provides identity. RBAC controls who can do what. Managed identities replace secrets.",
+    why: ["Central SSO", "Least privilege", "No secrets in code"],
+    how: [
+      "Grant roles at subscription/RG/resource scope.",
+      "Use managed identities/service principals for apps."
+    ],
+    steps: [
+      {
+        label: "Assign Reader at resource group",
+        portal: [
+          "RG -> Access control (IAM) -> Add role assignment -> Reader -> Select user -> Save."
+        ]
+      }
+    ],
+    real: ["Build pipelines use managed identity to pull secrets from Key Vault."],
+    faqs: [["RBAC vs Policy?","RBAC = WHO can do WHAT; Policy = WHAT is allowed to exist/configure."]]
+  },
 
-    { id:'governance', domain:'gov', title:'Governance (Management groups, subscriptions, RGs, tags, Policy)',
-      what:'Organize and control Azure at scale.',
-      why:['Consistent standards across teams.','Prevent drift and enforce compliance.','Enable chargeback/showback with tags.'],
-      how:[
-        'Management groups (top) → subscriptions → resource groups → resources.',
-        'Use tags like costCenter=Sales, env=Prod; enforce with Policy.',
-        'Lock critical resources with CanNotDelete/ReadOnly locks.'
-      ],
-      steps:[
-        {label:'Require tags with Azure Policy', portal:[
-          'Portal → Policy → Definitions → Search built‑in: "Require a tag and its value" → Assign.',
-          'Scope: subscription or RG → Parameters: tagName=costCenter, value=Demo → Review + create.'
-        ], cli:[
-          '# Example (uses a built‑in policy definition id)\n# az policy assignment create --name require-costcenter --scope <scopeId> --policy <definitionId> --params {"tagName":{"value":"costCenter"},"tagValue":{"value":"Demo"}}
-        ']}
-      ],
-      real:['Large orgs bake naming, locations, and tagging rules into Policy so every project stays compliant.'],
-      faqs:[['When to use Blueprints?','Blueprints are retired; use Policy + ARM/Bicep templates or landing zones.']]
-    },
+  {
+    id: "governance",
+    domain: "gov",
+    title: "Governance (Management groups, subscriptions, RGs, tags, Policy)",
+    what: "Organize Azure at scale and enforce standards.",
+    why: ["Consistency", "Compliance", "Cost visibility via tags"],
+    how: [
+      "Hierarchy: Mgmt Groups > Subscriptions > Resource Groups > Resources.",
+      "Enforce tags via built-in policies; lock critical resources."
+    ],
+    steps: [
+      {
+        label: "Require a tag with Azure Policy (Portal)",
+        portal: [
+          "Portal -> Policy -> Definitions -> Search: 'Require a tag and its value' -> Assign.",
+          "Scope: subscription or RG -> Parameters: tagName=costCenter, value=Demo -> Create."
+        ]
+      }
+    ],
+    real: ["Enterprises enforce name/location/tags with Policy; drift is blocked at create-time."],
+    faqs: [["Blueprints?","Retired. Use Policy + templates/landing zones."]]
+  },
 
-    { id:'security', domain:'gov', title:'Security & secrets (Defender for Cloud basics, Key Vault)',
-      what:'At fundamentals level: know how Azure helps you secure workloads and secrets.',
-      why:['Reduce risk of misconfiguration and credential leaks.'],
-      how:[
-        'Defender for Cloud surfaces security posture recommendations.',
-        'Key Vault stores keys/secrets/certs; integrate with managed identities.'
-      ],
-      steps:[
-        {label:'Store a secret in Key Vault', portal:[
-          'Portal → Key vaults → Create → Name: kv-az900-demo → RBAC permission model.',
-          'Once created → Objects → Secrets → Generate/Import → Name: db-password → Value: ****.'
-        ]}
-      ],
-      real:['Rotate database credentials in Key Vault; apps pull secrets at runtime using managed identity.'],
-      faqs:[['Key Vault vs App Settings?','App Settings are convenient; Key Vault is for secrets with access control, logging, and rotation.']]
-    },
+  {
+    id: "security",
+    domain: "gov",
+    title: "Security & secrets (Defender for Cloud, Key Vault)",
+    what: "Defender improves posture; Key Vault stores keys/secrets/certs.",
+    why: ["Reduce risk and misconfigurations", "Centralize and rotate secrets"],
+    how: [
+      "Review Defender recommendations and secure score.",
+      "Put secrets in Key Vault; apps use managed identity to access."
+    ],
+    steps: [
+      { label: "Create a secret (Portal)", portal: ["Key Vaults -> Create -> Objects -> Secrets -> New -> Name: db-password -> Value: ***"] }
+    ],
+    real: ["Rotate DB passwords in Key Vault; no secrets in app settings."],
+    faqs: [["Key Vault vs App Settings?","Key Vault is designed for secrets with access control and logging."]]
+  },
 
-    { id:'monitoring', domain:'gov', title:'Monitoring & reliability (Azure Monitor, Advisor, Backup)',
-      what:'Collect metrics/logs, set alerts, and protect data with backup; use Advisor for recommendations.',
-      why:['Detect issues early; meet RTO/RPO.', 'Optimize cost and resilience.'],
-      how:[
-        'Enable Monitor alerts on CPU/storage/HTTP errors.',
-        'Set up Azure Backup/Site Recovery for critical workloads.'
-      ],
-      steps:[
-        {label:'Set an alert on App Service errors', portal:[
-          'App Service → Alerts → Create alert rule → Signal: Http5xx → Threshold: > 5 in 5 minutes → Action group: Email/SMS.'
-        ]}
-      ],
-      real:['Ops teams triage 5xx spikes from App Gateway to backend pool with Monitor + Log Analytics.'],
-      faqs:[['What is Advisor?','A built‑in service that recommends cost, security, reliability, and performance improvements.']]
-    },
+  {
+    id: "cost-sla",
+    domain: "gov",
+    title: "Cost management, SLAs & support plans",
+    what: "Plan/track spend, understand availability, pick support tiers.",
+    why: ["Avoid overspend", "Set uptime expectations", "Know support response times"],
+    how: [
+      "Use Pricing/TCO calculators and Cost Management budgets.",
+      "SLA is per service; composite SLA multiplies component SLAs.",
+      "Support: Basic, Developer, Standard, Professional Direct."
+    ],
+    steps: [
+      { label: "Create a monthly budget", portal: ["Cost Management -> Budgets -> Add -> Monthly ₹2000 -> Alert at 80%."] }
+    ],
+    real: ["Teams tag resources and export monthly costs; alerts fire at 80/100%."],
+    faqs: [
+      ["Estimate a web app SLA?","Multiply component SLAs (concept only for AZ-900)."],
+      ["Fastest support plan?","Professional Direct."]
+    ]
+  }
+];
 
-    { id:'cost-sla', domain:'gov', title:'Cost management, SLAs & support plans',
-      what:'Plan and control spend; understand availability commitments and support options.',
-      why:['Avoid overspend; set expectations for uptime; know how to get help.'],
-      how:[
-        'Use Pricing Calculator/TCO for estimates; Cost Management budgets and exports.',
-        'SLAs vary by service; combining services affects composite SLA.',
-        'Support plans: Basic, Developer, Standard, Professional Direct.'
-      ],
-      steps:[
-        {label:'Create a budget with alert', portal:[
-          'Cost Management + Billing → Budgets → Add → Monthly ₹2000 → Alert at 80%.',
-          'Optionally export costs to storage for analysis.'
-        ]}
-      ],
-      real:['Finance teams tag all resources and review monthly exports; teams get notified at 80/100% budget thresholds.'],
-      faqs:[
-        ['How to estimate a web app SLA?','Multiply the component SLAs (e.g., App Service × Storage × DNS). For AZ‑900, understand the idea, not deep math.'],
-        ['Which support plan gives fastest response?','Professional Direct has the fastest response for critical issues.']
-      ]
-    }
-  ];
+/* ---------- Practice questions (original) ---------- */
+const questions = [
+  { domain: "cloud", stem: "Which describes the shared responsibility model best?", choices: [
+      "Microsoft secures everything; customers only pay bills.",
+      "It varies by IaaS/PaaS/SaaS between Microsoft and the customer.",
+      "Customers always handle physical datacenter security.",
+      "Your ISP handles it."
+    ], answer: 1, explain: "More customer control in IaaS; less in SaaS." },
+  { domain: "arch", stem: "Deploy a web app quickly with minimal server management. What to choose?", choices:[
+      "Azure Functions","Azure App Service","Azure VM Scale Sets","Azure Kubernetes Service"
+    ], answer: 1, explain: "App Service = PaaS for web apps." },
+  { domain: "gov", stem: "Main purpose of Azure Policy?", choices:[
+      "Provide network isolation","Enforce standards and assess compliance","Encrypt data at rest","Manage identity lifecycle"
+    ], answer: 1, explain: "Policy evaluates resources for compliance." },
+  { domain: "arch", stem: "Which redundancy keeps copies across three zones in one region?", choices:[
+      "LRS","GRS","ZRS","GZRS"
+    ], answer: 2, explain: "ZRS = zone-redundant within region." }
+];
 
-  // -------- Practice questions (original) --------
-  const questions = [
-    {domain:'cloud', stem:'Which statement best describes the shared responsibility model?', choices:[
-      'Microsoft secures everything and customers only pay bills.',
-      'Responsibilities vary by service type (IaaS/PaaS/SaaS) between Microsoft and the customer.',
-      'Customers are always responsible for physical datacenter security.',
-      'Security is handled by your ISP.'
-    ], answer:1, explain:'Responsibility shifts depending on service type; more customer control in IaaS.'},
-    {domain:'arch', stem:'You want to deploy a web app quickly without managing servers. Which option fits?', choices:['Azure Functions','Azure App Service','Azure VM Scale Sets','Azure Kubernetes Service'], answer:1, explain:'App Service is PaaS for web apps with minimal infra mgmt.'},
-    {domain:'gov', stem:'Main purpose of Azure Policy?', choices:['Provide network isolation','Enforce organizational standards and assess compliance','Encrypt data at rest','Manage identity lifecycle'], answer:1, explain:'Policy evaluates resources for compliance with defined rules.'},
-    {domain:'arch', stem:'Which redundancy replicates your data across three zones in a region?', choices:['LRS','GRS','ZRS','GZRS'], answer:2, explain:'ZRS = zone‑redundant storage within a region.'}
-  ];
+/* ---------- DOM helpers ---------- */
+const $ = (id) => document.getElementById(id);
+const searchInp = $("search");
+const domainSel = $("domain");
+const navEl = $("nav");
+const titleEl = $("topic-title");
+const domainEl = $("topic-domain");
+const contentEl = $("topic-content");
+const questionsEl = $("questions");
+const quizMode = $("quizmode");
 
-  // -------- Rendering & simple router --------
-  const byId = id => document.getElementById(id);
-  const searchInp = byId('search');
-  const domainSel = byId('domain');
-  const navEl = byId('nav');
-  const titleEl = byId('topic-title');
-  const domainEl = byId('topic-domain');
-  const contentEl = byId('topic-content');
-  const questionsEl = byId('questions');
-  const quizMode = byId('quizmode');
+/* ---------- Render functions ---------- */
+function labelFor(d){
+  if(d==="cloud") return "Describe cloud concepts";
+  if(d==="arch") return "Describe Azure architecture & services";
+  return "Describe Azure management & governance";
+}
 
-  function renderNav(){
-    const q = (searchInp.value||'').toLowerCase();
-    const d = domainSel.value;
-    navEl.innerHTML = '';
-    topics.filter(t => (d==='all'||t.domain===d) && (t.title.toLowerCase().includes(q) || (t.what+t.why?.join(' ')).toLowerCase().includes(q))).forEach(t => {
-      const b = document.createElement('button');
+function renderNav(){
+  const q = (searchInp.value || "").toLowerCase();
+  const d = domainSel.value;
+  navEl.innerHTML = "";
+  topics
+    .filter(t => (d==="all" || t.domain===d))
+    .filter(t => t.title.toLowerCase().includes(q) || (t.what + " " + (t.why||[]).join(" ")).toLowerCase().includes(q))
+    .forEach(t => {
+      const b = document.createElement("button");
       b.textContent = t.title;
-      b.onclick = () => { location.hash = `#/topic/${t.id}`; };
-      if(location.hash === `#/topic/${t.id}`){ b.classList.add('active'); }
+      b.onclick = () => { location.hash = "#/topic/" + t.id; };
+      if(location.hash === "#/topic/" + t.id){ b.classList.add("active"); }
       navEl.appendChild(b);
     });
-  }
+}
 
-  function sec(title, html){ return `<div class="section"><h4>${title}</h4>${html}</div>`; }
+function section(title, html){ return "<div class='section'><h4>"+title+"</h4>"+html+"</div>"; }
 
-  function renderTopic(id){
-    const t = topics.find(x => x.id===id) || topics[0];
-    titleEl.textContent = t.title;
-    domainEl.textContent = (t.domain==='cloud'?'Describe cloud concepts':t.domain==='arch'?'Describe Azure architecture & services':'Describe Azure management & governance');
+function renderTopic(id){
+  const t = topics.find(x => x.id===id) || topics[0];
+  titleEl.textContent = t.title;
+  domainEl.textContent = labelFor(t.domain);
 
-    const why = `<ul>${t.why.map(x=>`<li>${x}</li>`).join('')}</ul>`;
-    const how = `<ul>${t.how.map(x=>`<li>${x}</li>`).join('')}</ul>`;
-    const real = `<ul>${t.real.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  const what = "<p>"+t.what+"</p>";
+  const why = "<ul>"+t.why.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+  const how = "<ul>"+t.how.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+  const real = "<ul>"+t.real.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
 
-    const stepsHtml = t.steps?.map(s=>{
-      const portal = s.portal?`<ol class='steps'>${s.portal.map(x=>`<li>${x}</li>`).join('')}</ol>`:'';
-      const cli = s.cli?`<details><summary>CLI alternative</summary><pre class='code'>${(Array.isArray(s.cli)?s.cli:[s.cli]).join('\n')}</pre></details>`:'';
-      return `<div class='section'><h4>${s.label}</h4>${portal}${cli}</div>`;
-    }).join('') || '';
+  const stepsHtml = (t.steps||[]).map(s=>{
+    const portal = s.portal ? "<ol class='steps'>"+s.portal.map(x=>"<li>"+x+"</li>").join("")+"</ol>" : "";
+    return "<div class='section'><h4>"+s.label+"</h4>"+portal+"</div>";
+  }).join("");
 
-    const faq = t.faqs?.map(([q,a])=>`<details><summary>${q}</summary><div class='muted'>${a}</div></details>`).join('') || '';
+  const faqs = (t.faqs||[]).map(([q,a])=>"<details><summary>"+q+"</summary><div class='muted'>"+a+"</div></details>").join("");
 
-    const what = `<p>${t.what}</p>`;
+  contentEl.innerHTML =
+    "<div class='twocol'>"+
+      "<div>"+section("What", what)+section("Why", why)+section("How (at a glance)", how)+"</div>"+
+      "<div>"+section("Real-world use", real)+stepsHtml+"</div>"+
+    "</div>"+
+    section("Interview quick-answers (FAQs)", faqs);
 
-    contentEl.innerHTML = `
-      <div class='twocol'>
-        <div>
-          ${sec('What', what)}
-          ${sec('Why', why)}
-          ${sec('How (at a glance)', how)}
-        </div>
-        <div>
-          ${sec('Real‑world use', real)}
-          ${stepsHtml}
-        </div>
-      </div>
-      ${sec('Interview quick‑answers (FAQs)', faq)}
-    `;
-
-    // Render practice questions for the topic domain
-    renderQuestions(t.domain);
-    // Update active item in nav
-    renderNav();
-  }
-
-  function renderQuestions(domain){
-    questionsEl.innerHTML='';
-    questions.filter(q => domain==='all' ? true : q.domain===domain).forEach((x,i)=>{
-      const div = document.createElement('div');
-      div.className='card';
-      const id = `ans_${domain}_${i}`;
-      div.innerHTML = `<div><strong>Q.</strong> ${x.stem}</div>
-        <ol>${x.choices.map((c,idx)=>`<li><label><input type='radio' name='q_${domain}_${i}' value='${idx}'> ${c}</label></li>`).join('')}</ol>
-        <div id='${id}' class='muted' style='display:${quizMode.checked?'none':'block'}'><span class='ok'>Answer:</span> ${x.choices[x.answer]}<div class='muted'>${x.explain}</div></div>`;
-      div.addEventListener('change',(ev)=>{
-        if(ev.target && ev.target.name===`q_${domain}_${i}`){
-          const chosen = Number(ev.target.value);
-          const ans = document.getElementById(id);
-          ans.style.display = 'block';
-          ans.querySelector('.ok').textContent = chosen===x.answer ? 'Correct ✔' : 'Incorrect ✖';
-          ans.querySelector('.ok').className = chosen===x.answer ? 'ok' : 'bad';
-        }
-      });
-      questionsEl.appendChild(div);
-    });
-  }
-
-  // Router
-  window.addEventListener('hashchange',()=>{
-    const match = location.hash.match(/#\/topic\/(.+)$/);
-    renderTopic(match?match[1]:topics[0].id);
-  });
-
-  // Filters
-  searchInp.addEventListener('input', renderNav);
-  domainSel.addEventListener('change', ()=>{ renderNav(); renderTopic(topics[0].id); });
-  quizMode.addEventListener('change', ()=>{ document.querySelectorAll('[id^=ans_]').forEach(a=>a.style.display = quizMode.checked?'none':'block'); });
-
-  // Initial render
+  renderQuestions(t.domain);
   renderNav();
-  const initial = (location.hash.match(/#\/topic\/(.+)$/)||[])[1] || topics[0].id;
-  renderTopic(initial);
-  </script>
+}
+
+function renderQuestions(domain){
+  questionsEl.innerHTML = "";
+  questions.filter(q => domain==="all" ? true : q.domain===domain).forEach((x,i)=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    const id = "ans_"+domain+"_"+i;
+    card.innerHTML =
+      "<div><strong>Q.</strong> "+x.stem+"</div>"+
+      "<ol>"+x.choices.map((c,idx)=>"<li><label><input type='radio' name='q_"+domain+"_"+i+"' value='"+idx+"'> "+c+"</label></li>").join("")+"</ol>"+
+      "<div id='"+id+"' class='muted' style='display:"+(quizMode.checked?'none':'block')+"'><span class='ok'>Answer:</span> "+x.choices[x.answer]+"<div class='muted'>"+x.explain+"</div></div>";
+    card.addEventListener("change", (ev)=>{
+      if(ev.target && ev.target.name==="q_"+domain+"_"+i){
+        const chosen = Number(ev.target.value);
+        const ans = document.getElementById(id);
+        ans.style.display = "block";
+        const ok = ans.querySelector(".ok");
+        ok.textContent = (chosen===x.answer) ? "Correct ✔" : "Incorrect ✖";
+        ok.className = (chosen===x.answer) ? "ok" : "bad";
+      }
+    });
+    questionsEl.appendChild(card);
+  });
+}
+
+/* ---------- Router + Filters ---------- */
+window.addEventListener("hashchange",()=>{
+  const m = location.hash.match(/#\/topic\/(.+)$/);
+  renderTopic(m ? m[1] : topics[0].id);
+});
+searchInp.addEventListener("input", renderNav);
+domainSel.addEventListener("change", ()=>{ renderNav(); renderTopic(topics[0].id); });
+quizMode.addEventListener("change", ()=>{ 
+  document.querySelectorAll("[id^=ans_]").forEach(a=>a.style.display = quizMode.checked ? "none" : "block");
+});
+
+/* ---------- Initial render ---------- */
+renderNav();
+const initial = (location.hash.match(/#\/topic\/(.+)$/)||[])[1] || topics[0].id;
+renderTopic(initial);
+</script>
+
 </body>
 </html>
