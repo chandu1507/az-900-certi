@@ -3,35 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AZ-900 Study Companion (2025)</title>
+  <title>AZ-900 Study Companion (2025) — What • Why • How</title>
   <style>
-    :root{--bg:#0b1220;--panel:#121a2b;--muted:#9fb3c8;--text:#e6eef7;--accent:#5aa9ff;--ok:#2ecc71;--warn:#f39c12;--bad:#e74c3c}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial}
-    header{position:sticky;top:0;background:linear-gradient(180deg,#0b1220 0%,rgba(11,18,32,0.85) 100%);backdrop-filter:saturate(1.2) blur(6px);z-index:10;border-bottom:1px solid #1e2a44}
-    .wrap{max-width:1100px;margin:0 auto;padding:14px 18px}
+    :root{--bg:#0b1220;--panel:#11182a;--panel2:#0d1424;--muted:#a7bfd9;--text:#eaf2fb;--accent:#57a9ff;--accent2:#9ad2ff;--ok:#2ecc71;--warn:#f39c12;--bad:#ff6b6b}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0b1220 0%,#0b1220 60%,#091220 100%);color:var(--text);font:16px/1.55 system-ui, Segoe UI, Roboto, Helvetica, Arial}
+    a{color:var(--accent);text-decoration:none}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,18,32,.8);backdrop-filter:blur(6px);border-bottom:1px solid #1e2a44}
+    .wrap{max-width:1200px;margin:0 auto;padding:14px 18px}
     .brand{display:flex;gap:12px;align-items:center}
     .brand h1{font-size:18px;margin:0;font-weight:700}
     .tag{font-size:12px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:280px 1fr;gap:18px}
-    @media (max-width:960px){.grid{grid-template-columns:1fr}}
-    aside{background:var(--panel);border:1px solid #1e2a44;border-radius:14px;padding:14px}
-    main{display:flex;flex-direction:column;gap:18px}
+    .layout{display:grid;grid-template-columns:290px 1fr;gap:18px;margin-top:14px}
+    @media (max-width:980px){.layout{grid-template-columns:1fr}}
+    aside{background:var(--panel);border:1px solid #1e2a44;border-radius:14px;overflow:hidden}
+    .side{display:flex;flex-direction:column;height:100%}
+    .side .sec{padding:14px;border-bottom:1px solid #1e2a44}
+    .side .sec:last-child{border-bottom:0}
+    input,select,button{background:#0e1628;color:var(--text);border:1px solid #1e2a44;border-radius:10px;padding:10px;width:100%}
+    button{cursor:pointer}
+    .nav{display:flex;flex-direction:column;gap:6px;max-height:48vh;overflow:auto;padding-right:6px}
+    .nav button{display:flex;gap:10px;align-items:flex-start;background:transparent;border:1px solid #22304f;text-align:left;padding:8px 10px;border-radius:10px}
+    .nav button.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(87,169,255,.25) inset}
+    .badge{font-size:11px;color:#cde3ff;border:1px solid #22304f;border-radius:999px;padding:2px 8px}
+    .content{display:flex;flex-direction:column;gap:18px}
     .card{background:var(--panel);border:1px solid #1e2a44;border-radius:14px;padding:16px}
     .card h3{margin:.2rem 0 .6rem}
     .muted{color:var(--muted)}
-    input,select,button,textarea{background:#0e1627;color:var(--text);border:1px solid #1e2a44;border-radius:10px;padding:10px}
-    button{cursor:pointer}
-    .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:#0e1627;border:1px solid #22304f;color:#cfe1ff;font-size:12px}
-    .list{display:flex;flex-direction:column;gap:10px}
-    .topic{padding:10px;border:1px dashed #22304f;border-radius:10px}
-    .kvs{display:grid;grid-template-columns:140px 1fr;gap:10px;font-size:14px}
-    .q{padding:12px;border:1px solid #243356;border-radius:12px}
-    .answer{margin-top:10px;display:none}
-    .chip{display:inline-block;border:1px solid #22304f;border-radius:999px;padding:2px 8px;margin-right:6px;font-size:12px;color:#bcd2ee}
-    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .kvs{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:14px}
+    .section{margin:4px 0 10px}
+    .section h4{margin:.2rem 0 .4rem}
+    ul{margin:0 0 6px 18px}
+    .steps{counter-reset: step}
+    .steps li{margin-bottom:6px}
+    .steps li::marker{color:var(--accent)}
+    .code{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;background:#0c1528;border:1px solid #22304f;padding:2px 6px;border-radius:6px}
+    .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:980px){.twocol{grid-template-columns:1fr}}
+    .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid #22304f;background:#0d162b;border-radius:999px;padding:2px 10px;color:#cfe1ff;font-size:12px}
+    details{background:var(--panel2);border:1px dashed #22304f;border-radius:12px;padding:10px}
+    summary{cursor:pointer}
     .footer{color:#93a8c2;font-size:12px}
-    .link{color:var(--accent);text-decoration:none}
-    .code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#0c1528; border:1px solid #22304f; padding:2px 6px; border-radius:6px}
   </style>
 </head>
 <body>
@@ -40,181 +53,419 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12L12 3l9 9-9 9-9-9Z" stroke="#5aa9ff" stroke-width="1.5"/></svg>
       <div>
         <h1>AZ-900 Study Companion — 2025</h1>
-        <div class="tag">Latest skills & curated practice — no leaked questions</div>
+        <div class="tag">Aligned to Microsoft’s study guide: What • Why • How • Real‑world • Step‑by‑step</div>
       </div>
     </div>
   </header>
 
-  <div class="wrap" style="margin-top:14px">
-    <div class="grid">
-      <aside>
-        <div class="card">
-          <h3>Filters</h3>
-          <div class="list">
-            <label>
-              <div class="muted">Search</div>
-              <input id="search" placeholder="VMs, regions, SLA, RBAC…" />
-            </label>
-            <label>
-              <div class="muted">Domain</div>
-              <select id="domain">
-                <option value="all">All</option>
-                <option value="cloud">Describe cloud concepts</option>
-                <option value="arch">Describe Azure architecture & services</option>
-                <option value="gov">Describe Azure management & governance</option>
-              </select>
-            </label>
-            <button id="reset">Reset</button>
+  <div class="wrap layout">
+    <aside>
+      <div class="side">
+        <div class="sec">
+          <div class="muted" style="margin-bottom:6px">Search</div>
+          <input id="search" placeholder="VMs, regions, RBAC, Policy, SLA…" />
+        </div>
+        <div class="sec">
+          <div class="muted" style="margin-bottom:6px">Domains</div>
+          <select id="domain">
+            <option value="all">All</option>
+            <option value="cloud">Describe cloud concepts</option>
+            <option value="arch">Describe Azure architecture & services</option>
+            <option value="gov">Describe Azure management & governance</option>
+          </select>
+        </div>
+        <div class="sec">
+          <div class="muted" style="margin-bottom:6px">Topics</div>
+          <div id="nav" class="nav"></div>
+        </div>
+        <div class="sec">
+          <div class="muted" style="margin-bottom:6px">Quick Links</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <a class="pill" target="_blank" href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals/">Official AZ‑900</a>
+            <a class="pill" target="_blank" href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900">Study guide (skills measured)</a>
+            <a class="pill" target="_blank" href="https://learn.microsoft.com/training/courses/az-900t00">Instructor‑led course outline</a>
+            <a class="pill" target="_blank" href="https://learn.microsoft.com/credentials/certifications/practice-assessments-for-microsoft-certifications">Free practice assessment</a>
+            <a class="pill" target="_blank" href="https://learn.microsoft.com/credentials/support/certification-exam-candidate-agreement">Exam Candidate Agreement (NDA)</a>
           </div>
         </div>
-        <div class="card">
-          <h3>Quick Links</h3>
-          <div class="list">
-            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals/">Official AZ-900 page</a>
-            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900">Official study guide</a>
-            <a class="link" target="_blank" href="https://learn.microsoft.com/training/azure/">Microsoft Learn paths</a>
-            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/support/certification-exam-candidate-agreement">Exam candidate agreement (NDA)</a>
-          </div>
+        <div class="sec">
+          <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="quizmode"/> Quiz Mode (hide answers)</label>
         </div>
-        <div class="card">
-          <h3>Mode</h3>
-          <label><input type="checkbox" id="quizmode"/> Quiz Mode (hide answers)</label>
-        </div>
-      </aside>
+      </div>
+    </aside>
 
-      <main>
-        <section class="card">
-          <h3>Skills Measured</h3>
-          <div class="kvs">
-            <div class="muted">Domains</div>
-            <div>
-              <span class="chip">Describe cloud concepts</span>
-              <span class="chip">Describe Azure architecture & services</span>
-              <span class="chip">Describe Azure management & governance</span>
-            </div>
-            <div class="muted">Updated</div>
-            <div id="updated">2024-01-23 (from official page)</div>
+    <main class="content">
+      <section class="card">
+        <h3>Skills Measured</h3>
+        <div class="kvs">
+          <div class="muted">Domains</div>
+          <div>
+            <span class="badge">Describe cloud concepts</span>
+            <span class="badge">Describe Azure architecture & services</span>
+            <span class="badge">Describe Azure management & governance</span>
           </div>
-        </section>
+          <div class="muted">Source</div>
+          <div>Microsoft Learn study guide (check periodically for updates)</div>
+        </div>
+      </section>
 
-        <section class="card">
-          <h3>Topic Explorer</h3>
-          <div id="topics" class="list"></div>
-        </section>
+      <section id="topic-view" class="card">
+        <h3 id="topic-title">Topic</h3>
+        <div id="topic-domain" class="muted"></div>
+        <div id="topic-content"></div>
+      </section>
 
-        <section class="card">
-          <h3>Practice Questions (original)</h3>
-          <div class="muted">We do <span class="warn">NOT</span> host leaked/real exam items. These are crafted to mirror AZ-900 style and scope.</div>
-          <div id="questions" class="list"></div>
-        </section>
+      <section class="card">
+        <h3>Practice Questions (original)</h3>
+        <div class="muted">We do <span class="warn">NOT</span> host leaked/real exam items. These are crafted to mirror AZ‑900 style and scope.</div>
+        <div id="questions" class="list"></div>
+      </section>
 
-        <section class="card footer">
-          <div>Made for static hosting (GitHub Pages/Netlify/Vercel). Single HTML file. Add your own topics/questions by editing the <span class="code">data</span> constant below.</div>
-        </section>
-      </main>
-    </div>
+      <section class="card footer">
+        <div>Single‑file static site. You can extend topics & quizzes by editing the <span class="code">topics</span> and <span class="code">questions</span> arrays in the script.</div>
+      </section>
+    </main>
   </div>
 
   <script>
-    const data = {
-      topics: [
-        { id:"cloud-1", domain:"cloud", title:"Cloud models & benefits", bullets:[
-          "CapEx vs OpEx; elasticity, agility, fault tolerance",
-          "Public vs private vs hybrid; multi-cloud vs hybrid cloud",
-          "Shared responsibility model (cloud vs on-prem)"
-        ], refs:[
-          {label:"Cloud concepts", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}
-        ]},
-        { id:"arch-1", domain:"arch", title:"Global infrastructure", bullets:[
-          "Regions, Availability Zones, Region Pairs",
-          "Geographies, sovereign regions, data residency",
-          "Service types: IaaS, PaaS, SaaS examples"
-        ], refs:[{label:"Study guide", url:"https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900"}]},
-        { id:"arch-2", domain:"arch", title:"Core Azure services", bullets:[
-          "Compute: VMs, VMSS, Azure App Service, AKS, ACI",
-          "Storage: Standard vs Premium, redundancy (LRS/ZRS/GRS/GZRS)",
-          "Networking: VNets, subnets, NSG, VPN, ExpressRoute"
-        ], refs:[{label:"Training course", url:"https://learn.microsoft.com/training/courses/az-900t00"}]},
-        { id:"arch-3", domain:"arch", title:"Data & AI (fundamentals)", bullets:[
-          "Azure SQL family, Cosmos DB models, Azure Storage tables",
-          "Azure Synapse overview, Data Factory basics",
-          "AI services high-level: Azure AI Studio/Cognitive Services"
-        ], refs:[{label:"Learn paths", url:"https://learn.microsoft.com/training/azure/"}]},
-        { id:"gov-1", domain:"gov", title:"Identity, access & security", bullets:[
-          "Microsoft Entra ID (formerly Azure AD), tenants, subscriptions",
-          "RBAC vs Azure built-in roles, resource locks",
-          "Security Center/Defender for Cloud, Key Vault basics"
-        ], refs:[{label:"Study guide", url:"https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900"}]},
-        { id:"gov-2", domain:"gov", title:"Governance & compliance", bullets:[
-          "Management groups, subscriptions, resource groups",
-          "Azure Policy vs Blueprints (retired) -> use landing zones",
-          "Tags, cost centers, resource naming"
-        ], refs:[{label:"Official page", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}]},
-        { id:"gov-3", domain:"gov", title:"Cost management & SLAs", bullets:[
-          "Pricing calculators, TCO, Cost Management + Billing",
-          "Service-level agreements & lifecycle (GA/Preview/Retire)",
-          "Support plans (Basic/Developer/Standard/Professional Direct)"
-        ], refs:[{label:"Pricing & support", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}]}
+  // -------- Topic data: What • Why • How • Steps • Real world • FAQ --------
+  const topics = [
+    {
+      id:'cloud-foundations', domain:'cloud', title:'Cloud computing fundamentals',
+      what:`Cloud computing lets you rent IT resources (compute, storage, networking) from a provider over the internet on a pay‑as‑you‑go model.`,
+      why:[
+        'Reduce upfront costs (shift CapEx → OpEx).',
+        'Scale up/down quickly; experiment faster.',
+        'Increase resilience using multiple zones/regions.'
       ],
-      questions:[
-        {domain:"cloud", stem:"Which statement best describes the shared responsibility model in Azure?", choices:[
-          "Microsoft secures everything in the cloud; customers configure services.",
-          "Responsibilities vary by service type (IaaS/PaaS/SaaS) between Microsoft and the customer.",
-          "Customers are always responsible for physical datacenter security.",
-          "Security is handled by your ISP."], answer:1, explain:"Responsibility shifts depending on service type; e.g., more customer control in IaaS."},
-        {domain:"arch", stem:"You need to deploy a web app quickly without managing servers. Which option fits AZ-900 scope?", choices:["Azure Functions","Azure App Service","Azure VM Scale Sets","Azure Kubernetes Service"], answer:1, explain:"App Service provides PaaS for web apps; minimal infra mgmt."},
-        {domain:"gov", stem:"What is the main purpose of Azure Policy?", choices:["Provide network isolation","Enforce organizational standards and assess compliance","Encrypt data at rest","Manage identity lifecycle"], answer:1, explain:"Azure Policy evaluates resources for compliance with defined rules."},
-        {domain:"arch", stem:"Which redundancy option replicates your data across three zones in a region?", choices:["LRS","GRS","ZRS","GZRS"], answer:2, explain:"ZRS = zone-redundant storage within a region."}
+      how:[
+        'Choose the right model: IaaS (you manage VMs), PaaS (provider manages runtime), SaaS (complete app).',
+        'Pick a deployment model: public, private, or hybrid; many orgs use hybrid for gradual migration.',
+        'Understand shared responsibility: more provider responsibility as you move from IaaS → PaaS → SaaS.'
+      ],
+      steps:[
+        {label:'Try billing safe: free sandbox', portal:[
+          'Create a free Azure account or use a sponsored subscription.',
+          'In Cost Management, set a budget alert (e.g., \'₹500\').'
+        ]}
+      ],
+      real:[
+        'Startups iterate quickly using App Service (PaaS) instead of provisioning VMs.',
+        'Enterprises extend on‑prem AD with Entra ID and connect sites with VPN/ExpressRoute (hybrid).'
+      ],
+      faqs:[
+        ['What is consumption‑based pricing?','You pay only for what you use; many services also offer free tiers.'],
+        ['When to prefer PaaS over IaaS?','When you want the provider to manage OS patches, scaling, and runtime so you focus on code.']
       ]
-    };
+    },
 
-    const topicsEl = document.getElementById('topics');
-    const questionsEl = document.getElementById('questions');
-    const domainSel = document.getElementById('domain');
-    const searchInp = document.getElementById('search');
-    const resetBtn = document.getElementById('reset');
-    const quizMode = document.getElementById('quizmode');
+    { id:'global-infra', domain:'arch', title:'Azure global infrastructure',
+      what:'Azure is organized into regions (datacenter locations) grouped into geographies; many regions have three Availability Zones; every region has a pair for disaster recovery.',
+      why:['Pick regions close to users to reduce latency.','Use zone and region redundancy for high availability.','Meet data residency requirements.'],
+      how:[
+        'Deploy resources into a region (e.g., East US, Central India).',
+        'For HA: use zones within a region; for DR: use region pairs.'
+      ],
+      steps:[
+        {label:'Create a resource group in your region', portal:[
+          'Portal → Resource groups → Create → Name: rg-az900-demo → Region: India Central (or nearest).',
+          'Review + create.'
+        ], cli:[
+          'az group create -n rg-az900-demo -l centralindia'
+        ]}
+      ],
+      real:['Design apps for zone failure (multi-zone LB + VMSS) and regional DR (geo‑redundant storage, backups).'],
+      faqs:[
+        ['What is a region pair?','Two regions in the same geography paired for prioritized recovery and updates.']
+      ]
+    },
 
-    function render(){
-      const q = (searchInp.value||'').toLowerCase();
-      const d = domainSel.value;
-      topicsEl.innerHTML = '';
-      data.topics.filter(t => (d==='all'||t.domain===d) && (t.title.toLowerCase().includes(q) || t.bullets.join(' ').toLowerCase().includes(q))).forEach(t => {
-        const div = document.createElement('div');
-        div.className='topic';
-        div.innerHTML = `<strong>${t.title}</strong><div class="muted">Domain: ${labelFor(t.domain)}</div><ul>${t.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><div>${t.refs.map(r=>`<a class="link" target="_blank" href="${r.url}">${r.label}</a>`).join(' · ')}</div>`;
-        topicsEl.appendChild(div);
-      });
+    { id:'compute', domain:'arch', title:'Compute options (VMs, App Service, Functions, AKS, ACI)',
+      what:'Azure offers multiple ways to run code: IaaS VMs/VMSS, PaaS App Service, serverless Functions, containers (ACI) and orchestration (AKS).',
+      why:['Match control vs. convenience: VMs give control; PaaS reduces ops; serverless scales to zero.','Cost efficiency and faster time to market.'],
+      how:[
+        'Web apps: prefer App Service (PaaS).','Event‑driven jobs: use Functions.','Lift‑and‑shift or custom OS needs: VMs/VMSS.','Containers needing orchestration: AKS; simple one‑off containers: ACI.'
+      ],
+      steps:[
+        {label:'Deploy a sample web app (PaaS)', portal:[
+          'Portal → App Services → Create → Publish: Code → Runtime: .NET/Node → Region: same as RG.',
+          'Create a new App Service plan (B1 for low cost).',
+          'Review + create → Browse site.'
+        ], cli:[
+          'az webapp up -n az900-demo-web -g rg-az900-demo -l centralindia'
+        ]},
+        {label:'Create a VM (IaaS)', portal:[
+          'Portal → Virtual machines → Create → Size: small → Inbound ports: allow 22/3389 only if needed.',
+          'Enable just‑in‑time (Defender) and use NSG rules for access.'
+        ]}
+      ],
+      real:['Prod sites often start on App Service; heavy customization or Windows legacy apps might need VMs.'],
+      faqs:[
+        ['When to choose AKS for AZ‑900?','Only recognize it at a high level—AKS is for container orchestration at scale.']
+      ]
+    },
 
-      questionsEl.innerHTML='';
-      data.questions.filter(x => d==='all' || x.domain===d).filter(x => x.stem.toLowerCase().includes(q) || x.choices.join(' ').toLowerCase().includes(q)).forEach((x,i)=>{
-        const div = document.createElement('div');
-        div.className='q';
-        const id = `a_${i}`;
-        div.innerHTML = `<div><strong>Q${i+1}.</strong> ${x.stem}</div>
-          <ol>${x.choices.map((c,idx)=>`<li><label><input type="radio" name="q_${i}" value="${idx}"> ${c}</label></li>`).join('')}</ol>
-          <div id="${id}" class="answer ${quizMode.checked?'hidden':''}"><span class="ok">Answer:</span> ${x.choices[x.answer]}<div class="muted">${x.explain}</div></div>`;
-        div.addEventListener('change',(ev)=>{
-          if(ev.target && ev.target.name===`q_${i}`){
-            const chosen = Number(ev.target.value);
-            const ans = document.getElementById(id);
-            ans.style.display = 'block';
-            if(chosen===x.answer){ ans.querySelector('.ok').textContent = 'Correct ✔'; ans.querySelector('.ok').className='ok'; }
-            else { ans.querySelector('.ok').textContent = 'Incorrect ✖'; ans.querySelector('.ok').className='bad'; }
-          }
-        });
-        questionsEl.appendChild(div);
-      });
+    { id:'networking', domain:'arch', title:'Networking basics (VNet, subnets, NSG, VPN, ExpressRoute)',
+      what:'A VNet is your private network in Azure. Subnets segment traffic. NSGs filter traffic. VPN Gateway connects on‑prem networks; ExpressRoute provides private dedicated connectivity.',
+      why:['Isolate workloads securely.','Connect cloud with on‑prem networks.','Control inbound/outbound traffic with NSG rules.'],
+      how:[
+        'Create a VNet with address space (e.g., 10.0.0.0/16) and subnets (web 10.0.1.0/24, data 10.0.2.0/24).','Attach NSGs with allow/deny rules.','Use Bastion/Jumpbox to avoid exposing RDP/SSH to internet.'
+      ],
+      steps:[
+        {label:'Create VNet + subnets + NSG (Portal)', portal:[
+          'Portal → Virtual networks → Create → Address space 10.0.0.0/16.',
+          'Add subnets: web 10.0.1.0/24, data 10.0.2.0/24.',
+          'Create an NSG → Add inbound rule: allow 443 from Internet to web subnet; deny 0.0.0.0/0 for 22/3389.'
+        ]}
+      ],
+      real:['Typical three‑tier app: LB → web subnet → app subnet → DB subnet with NSGs between tiers.'],
+      faqs:[['NSG vs Firewall?','NSG is subnet/VM level stateless filtering; Azure Firewall is a managed, stateful network security service.']]
+    },
+
+    { id:'storage', domain:'arch', title:'Storage & redundancy (Blob, File, Queue, Table; LRS/ZRS/GRS/GZRS)',
+      what:'Azure Storage offers multiple data types and redundancy options to protect data against failures.',
+      why:['Choose the right data type for apps (objects vs files vs messages vs NoSQL).','Pick redundancy to meet uptime/DR goals.'],
+      how:[
+        'Blob for unstructured data; File for SMB shares; Queue for decoupling; Table for key‑value NoSQL.',
+        'Redundancy: LRS (single zone), ZRS (multi‑zone), GRS/GZRS (geo‑replication).'
+      ],
+      steps:[
+        {label:'Create Storage account with ZRS', portal:[
+          'Portal → Storage accounts → Create → Redundancy: ZRS.',
+          'Create a container → Upload a file → Generate a SAS (time‑limited access).'
+        ], cli:[
+          'az storage account create -n az900stor$RANDOM -g rg-az900-demo -l centralindia --sku Standard_ZRS'
+        ]}
+      ],
+      real:['Media files in Blob with CDN; shared app configs on File shares; command queueing via Queue.'],
+      faqs:[['When pick GZRS?','When you need both zone and region protection with read‑access geo‑replication.']]
+    },
+
+    { id:'data-ai', domain:'arch', title:'Databases & analytics overview (Azure SQL, Cosmos DB, Synapse, ADF)',
+      what:'Fundamentals awareness of managed databases and analytics services.',
+      why:['Use fully‑managed services to reduce ops overhead.','Choose the right store for relational vs NoSQL vs analytics.'],
+      how:[
+        'Relational OLTP: Azure SQL Database or Managed Instance.',
+        'NoSQL, global distribution: Cosmos DB.',
+        'Analytics/warehouse: Synapse; Pipelines: Data Factory.'
+      ],
+      steps:[
+        {label:'Create Azure SQL Database (quickstart)', portal:[
+          'Portal → Azure SQL → Create SQL Database → Serverless tier for demos.',
+          'Set firewall to allow your client IP only; avoid public exposure.'
+        ]}
+      ],
+      real:['Multi‑region ecommerce uses Cosmos DB for product catalog; BI teams use Synapse + Power BI.'],
+      faqs:[['Cosmos DB consistency levels?','Eventual, Session, Consistent Prefix, Bounded Staleness, Strong (know at a high level).']]
+    },
+
+    { id:'identity', domain:'gov', title:'Identity & access (Microsoft Entra ID, RBAC, service principals)',
+      what:'Entra ID (formerly Azure AD) is the identity backbone. RBAC controls who can do what on resources.',
+      why:['Centralize identity and SSO across apps.','Least privilege access and auditability.'],
+      how:[
+        'Create users/groups in the tenant; grant roles at subscription/resource group/resource scope.',
+        'Use service principals/managed identities for apps—avoid secrets in code.'
+      ],
+      steps:[
+        {label:'Assign Reader role at resource group scope', portal:[
+          'Portal → Resource groups → rg-az900-demo → Access control (IAM) → Add role assignment → Reader → Select user → Save.'
+        ], cli:['az role assignment create --assignee <userPrincipalName> --role Reader --scope $(az group show -n rg-az900-demo --query id -o tsv)']}
+      ],
+      real:['Deploy pipelines use managed identities to access Storage and Key Vault without embedded secrets.'],
+      faqs:[['RBAC vs Azure Policy?','RBAC answers WHO can do WHAT; Policy answers WHAT is allowed to exist/configure.']]
+    },
+
+    { id:'governance', domain:'gov', title:'Governance (Management groups, subscriptions, RGs, tags, Policy)',
+      what:'Organize and control Azure at scale.',
+      why:['Consistent standards across teams.','Prevent drift and enforce compliance.','Enable chargeback/showback with tags.'],
+      how:[
+        'Management groups (top) → subscriptions → resource groups → resources.',
+        'Use tags like costCenter=Sales, env=Prod; enforce with Policy.',
+        'Lock critical resources with CanNotDelete/ReadOnly locks.'
+      ],
+      steps:[
+        {label:'Require tags with Azure Policy', portal:[
+          'Portal → Policy → Definitions → Search built‑in: "Require a tag and its value" → Assign.',
+          'Scope: subscription or RG → Parameters: tagName=costCenter, value=Demo → Review + create.'
+        ], cli:[
+          '# Example (uses a built‑in policy definition id)\n# az policy assignment create --name require-costcenter --scope <scopeId> --policy <definitionId> --params {"tagName":{"value":"costCenter"},"tagValue":{"value":"Demo"}}
+        ']}
+      ],
+      real:['Large orgs bake naming, locations, and tagging rules into Policy so every project stays compliant.'],
+      faqs:[['When to use Blueprints?','Blueprints are retired; use Policy + ARM/Bicep templates or landing zones.']]
+    },
+
+    { id:'security', domain:'gov', title:'Security & secrets (Defender for Cloud basics, Key Vault)',
+      what:'At fundamentals level: know how Azure helps you secure workloads and secrets.',
+      why:['Reduce risk of misconfiguration and credential leaks.'],
+      how:[
+        'Defender for Cloud surfaces security posture recommendations.',
+        'Key Vault stores keys/secrets/certs; integrate with managed identities.'
+      ],
+      steps:[
+        {label:'Store a secret in Key Vault', portal:[
+          'Portal → Key vaults → Create → Name: kv-az900-demo → RBAC permission model.',
+          'Once created → Objects → Secrets → Generate/Import → Name: db-password → Value: ****.'
+        ]}
+      ],
+      real:['Rotate database credentials in Key Vault; apps pull secrets at runtime using managed identity.'],
+      faqs:[['Key Vault vs App Settings?','App Settings are convenient; Key Vault is for secrets with access control, logging, and rotation.']]
+    },
+
+    { id:'monitoring', domain:'gov', title:'Monitoring & reliability (Azure Monitor, Advisor, Backup)',
+      what:'Collect metrics/logs, set alerts, and protect data with backup; use Advisor for recommendations.',
+      why:['Detect issues early; meet RTO/RPO.', 'Optimize cost and resilience.'],
+      how:[
+        'Enable Monitor alerts on CPU/storage/HTTP errors.',
+        'Set up Azure Backup/Site Recovery for critical workloads.'
+      ],
+      steps:[
+        {label:'Set an alert on App Service errors', portal:[
+          'App Service → Alerts → Create alert rule → Signal: Http5xx → Threshold: > 5 in 5 minutes → Action group: Email/SMS.'
+        ]}
+      ],
+      real:['Ops teams triage 5xx spikes from App Gateway to backend pool with Monitor + Log Analytics.'],
+      faqs:[['What is Advisor?','A built‑in service that recommends cost, security, reliability, and performance improvements.']]
+    },
+
+    { id:'cost-sla', domain:'gov', title:'Cost management, SLAs & support plans',
+      what:'Plan and control spend; understand availability commitments and support options.',
+      why:['Avoid overspend; set expectations for uptime; know how to get help.'],
+      how:[
+        'Use Pricing Calculator/TCO for estimates; Cost Management budgets and exports.',
+        'SLAs vary by service; combining services affects composite SLA.',
+        'Support plans: Basic, Developer, Standard, Professional Direct.'
+      ],
+      steps:[
+        {label:'Create a budget with alert', portal:[
+          'Cost Management + Billing → Budgets → Add → Monthly ₹2000 → Alert at 80%.',
+          'Optionally export costs to storage for analysis.'
+        ]}
+      ],
+      real:['Finance teams tag all resources and review monthly exports; teams get notified at 80/100% budget thresholds.'],
+      faqs:[
+        ['How to estimate a web app SLA?','Multiply the component SLAs (e.g., App Service × Storage × DNS). For AZ‑900, understand the idea, not deep math.'],
+        ['Which support plan gives fastest response?','Professional Direct has the fastest response for critical issues.']
+      ]
     }
+  ];
 
-    function labelFor(d){ return d==='cloud'?'Describe cloud concepts': d==='arch'?'Describe Azure architecture & services':'Describe Azure management & governance';}
+  // -------- Practice questions (original) --------
+  const questions = [
+    {domain:'cloud', stem:'Which statement best describes the shared responsibility model?', choices:[
+      'Microsoft secures everything and customers only pay bills.',
+      'Responsibilities vary by service type (IaaS/PaaS/SaaS) between Microsoft and the customer.',
+      'Customers are always responsible for physical datacenter security.',
+      'Security is handled by your ISP.'
+    ], answer:1, explain:'Responsibility shifts depending on service type; more customer control in IaaS.'},
+    {domain:'arch', stem:'You want to deploy a web app quickly without managing servers. Which option fits?', choices:['Azure Functions','Azure App Service','Azure VM Scale Sets','Azure Kubernetes Service'], answer:1, explain:'App Service is PaaS for web apps with minimal infra mgmt.'},
+    {domain:'gov', stem:'Main purpose of Azure Policy?', choices:['Provide network isolation','Enforce organizational standards and assess compliance','Encrypt data at rest','Manage identity lifecycle'], answer:1, explain:'Policy evaluates resources for compliance with defined rules.'},
+    {domain:'arch', stem:'Which redundancy replicates your data across three zones in a region?', choices:['LRS','GRS','ZRS','GZRS'], answer:2, explain:'ZRS = zone‑redundant storage within a region.'}
+  ];
 
-    searchInp.addEventListener('input', render);
-    domainSel.addEventListener('change', render);
-    resetBtn.addEventListener('click', ()=>{ searchInp.value=''; domainSel.value='all'; render();});
-    quizMode.addEventListener('change', ()=>{ document.querySelectorAll('.answer').forEach(a=>a.style.display = quizMode.checked?'none':'block'); });
+  // -------- Rendering & simple router --------
+  const byId = id => document.getElementById(id);
+  const searchInp = byId('search');
+  const domainSel = byId('domain');
+  const navEl = byId('nav');
+  const titleEl = byId('topic-title');
+  const domainEl = byId('topic-domain');
+  const contentEl = byId('topic-content');
+  const questionsEl = byId('questions');
+  const quizMode = byId('quizmode');
 
-    render();
+  function renderNav(){
+    const q = (searchInp.value||'').toLowerCase();
+    const d = domainSel.value;
+    navEl.innerHTML = '';
+    topics.filter(t => (d==='all'||t.domain===d) && (t.title.toLowerCase().includes(q) || (t.what+t.why?.join(' ')).toLowerCase().includes(q))).forEach(t => {
+      const b = document.createElement('button');
+      b.textContent = t.title;
+      b.onclick = () => { location.hash = `#/topic/${t.id}`; };
+      if(location.hash === `#/topic/${t.id}`){ b.classList.add('active'); }
+      navEl.appendChild(b);
+    });
+  }
+
+  function sec(title, html){ return `<div class="section"><h4>${title}</h4>${html}</div>`; }
+
+  function renderTopic(id){
+    const t = topics.find(x => x.id===id) || topics[0];
+    titleEl.textContent = t.title;
+    domainEl.textContent = (t.domain==='cloud'?'Describe cloud concepts':t.domain==='arch'?'Describe Azure architecture & services':'Describe Azure management & governance');
+
+    const why = `<ul>${t.why.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    const how = `<ul>${t.how.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+    const real = `<ul>${t.real.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+
+    const stepsHtml = t.steps?.map(s=>{
+      const portal = s.portal?`<ol class='steps'>${s.portal.map(x=>`<li>${x}</li>`).join('')}</ol>`:'';
+      const cli = s.cli?`<details><summary>CLI alternative</summary><pre class='code'>${(Array.isArray(s.cli)?s.cli:[s.cli]).join('\n')}</pre></details>`:'';
+      return `<div class='section'><h4>${s.label}</h4>${portal}${cli}</div>`;
+    }).join('') || '';
+
+    const faq = t.faqs?.map(([q,a])=>`<details><summary>${q}</summary><div class='muted'>${a}</div></details>`).join('') || '';
+
+    const what = `<p>${t.what}</p>`;
+
+    contentEl.innerHTML = `
+      <div class='twocol'>
+        <div>
+          ${sec('What', what)}
+          ${sec('Why', why)}
+          ${sec('How (at a glance)', how)}
+        </div>
+        <div>
+          ${sec('Real‑world use', real)}
+          ${stepsHtml}
+        </div>
+      </div>
+      ${sec('Interview quick‑answers (FAQs)', faq)}
+    `;
+
+    // Render practice questions for the topic domain
+    renderQuestions(t.domain);
+    // Update active item in nav
+    renderNav();
+  }
+
+  function renderQuestions(domain){
+    questionsEl.innerHTML='';
+    questions.filter(q => domain==='all' ? true : q.domain===domain).forEach((x,i)=>{
+      const div = document.createElement('div');
+      div.className='card';
+      const id = `ans_${domain}_${i}`;
+      div.innerHTML = `<div><strong>Q.</strong> ${x.stem}</div>
+        <ol>${x.choices.map((c,idx)=>`<li><label><input type='radio' name='q_${domain}_${i}' value='${idx}'> ${c}</label></li>`).join('')}</ol>
+        <div id='${id}' class='muted' style='display:${quizMode.checked?'none':'block'}'><span class='ok'>Answer:</span> ${x.choices[x.answer]}<div class='muted'>${x.explain}</div></div>`;
+      div.addEventListener('change',(ev)=>{
+        if(ev.target && ev.target.name===`q_${domain}_${i}`){
+          const chosen = Number(ev.target.value);
+          const ans = document.getElementById(id);
+          ans.style.display = 'block';
+          ans.querySelector('.ok').textContent = chosen===x.answer ? 'Correct ✔' : 'Incorrect ✖';
+          ans.querySelector('.ok').className = chosen===x.answer ? 'ok' : 'bad';
+        }
+      });
+      questionsEl.appendChild(div);
+    });
+  }
+
+  // Router
+  window.addEventListener('hashchange',()=>{
+    const match = location.hash.match(/#\/topic\/(.+)$/);
+    renderTopic(match?match[1]:topics[0].id);
+  });
+
+  // Filters
+  searchInp.addEventListener('input', renderNav);
+  domainSel.addEventListener('change', ()=>{ renderNav(); renderTopic(topics[0].id); });
+  quizMode.addEventListener('change', ()=>{ document.querySelectorAll('[id^=ans_]').forEach(a=>a.style.display = quizMode.checked?'none':'block'); });
+
+  // Initial render
+  renderNav();
+  const initial = (location.hash.match(/#\/topic\/(.+)$/)||[])[1] || topics[0].id;
+  renderTopic(initial);
   </script>
 </body>
 </html>
