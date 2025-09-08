@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AZ-900 Study Companion (2025)</title>
+  <style>
+    :root{--bg:#0b1220;--panel:#121a2b;--muted:#9fb3c8;--text:#e6eef7;--accent:#5aa9ff;--ok:#2ecc71;--warn:#f39c12;--bad:#e74c3c}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    header{position:sticky;top:0;background:linear-gradient(180deg,#0b1220 0%,rgba(11,18,32,0.85) 100%);backdrop-filter:saturate(1.2) blur(6px);z-index:10;border-bottom:1px solid #1e2a44}
+    .wrap{max-width:1100px;margin:0 auto;padding:14px 18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand h1{font-size:18px;margin:0;font-weight:700}
+    .tag{font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:18px}
+    @media (max-width:960px){.grid{grid-template-columns:1fr}}
+    aside{background:var(--panel);border:1px solid #1e2a44;border-radius:14px;padding:14px}
+    main{display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--panel);border:1px solid #1e2a44;border-radius:14px;padding:16px}
+    .card h3{margin:.2rem 0 .6rem}
+    .muted{color:var(--muted)}
+    input,select,button,textarea{background:#0e1627;color:var(--text);border:1px solid #1e2a44;border-radius:10px;padding:10px}
+    button{cursor:pointer}
+    .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:#0e1627;border:1px solid #22304f;color:#cfe1ff;font-size:12px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .topic{padding:10px;border:1px dashed #22304f;border-radius:10px}
+    .kvs{display:grid;grid-template-columns:140px 1fr;gap:10px;font-size:14px}
+    .q{padding:12px;border:1px solid #243356;border-radius:12px}
+    .answer{margin-top:10px;display:none}
+    .chip{display:inline-block;border:1px solid #22304f;border-radius:999px;padding:2px 8px;margin-right:6px;font-size:12px;color:#bcd2ee}
+    .ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    .footer{color:#93a8c2;font-size:12px}
+    .link{color:var(--accent);text-decoration:none}
+    .code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background:#0c1528; border:1px solid #22304f; padding:2px 6px; border-radius:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 12L12 3l9 9-9 9-9-9Z" stroke="#5aa9ff" stroke-width="1.5"/></svg>
+      <div>
+        <h1>AZ-900 Study Companion — 2025</h1>
+        <div class="tag">Latest skills & curated practice — no leaked questions</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap" style="margin-top:14px">
+    <div class="grid">
+      <aside>
+        <div class="card">
+          <h3>Filters</h3>
+          <div class="list">
+            <label>
+              <div class="muted">Search</div>
+              <input id="search" placeholder="VMs, regions, SLA, RBAC…" />
+            </label>
+            <label>
+              <div class="muted">Domain</div>
+              <select id="domain">
+                <option value="all">All</option>
+                <option value="cloud">Describe cloud concepts</option>
+                <option value="arch">Describe Azure architecture & services</option>
+                <option value="gov">Describe Azure management & governance</option>
+              </select>
+            </label>
+            <button id="reset">Reset</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Quick Links</h3>
+          <div class="list">
+            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals/">Official AZ-900 page</a>
+            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900">Official study guide</a>
+            <a class="link" target="_blank" href="https://learn.microsoft.com/training/azure/">Microsoft Learn paths</a>
+            <a class="link" target="_blank" href="https://learn.microsoft.com/credentials/support/certification-exam-candidate-agreement">Exam candidate agreement (NDA)</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Mode</h3>
+          <label><input type="checkbox" id="quizmode"/> Quiz Mode (hide answers)</label>
+        </div>
+      </aside>
+
+      <main>
+        <section class="card">
+          <h3>Skills Measured</h3>
+          <div class="kvs">
+            <div class="muted">Domains</div>
+            <div>
+              <span class="chip">Describe cloud concepts</span>
+              <span class="chip">Describe Azure architecture & services</span>
+              <span class="chip">Describe Azure management & governance</span>
+            </div>
+            <div class="muted">Updated</div>
+            <div id="updated">2024-01-23 (from official page)</div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Topic Explorer</h3>
+          <div id="topics" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h3>Practice Questions (original)</h3>
+          <div class="muted">We do <span class="warn">NOT</span> host leaked/real exam items. These are crafted to mirror AZ-900 style and scope.</div>
+          <div id="questions" class="list"></div>
+        </section>
+
+        <section class="card footer">
+          <div>Made for static hosting (GitHub Pages/Netlify/Vercel). Single HTML file. Add your own topics/questions by editing the <span class="code">data</span> constant below.</div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      topics: [
+        { id:"cloud-1", domain:"cloud", title:"Cloud models & benefits", bullets:[
+          "CapEx vs OpEx; elasticity, agility, fault tolerance",
+          "Public vs private vs hybrid; multi-cloud vs hybrid cloud",
+          "Shared responsibility model (cloud vs on-prem)"
+        ], refs:[
+          {label:"Cloud concepts", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}
+        ]},
+        { id:"arch-1", domain:"arch", title:"Global infrastructure", bullets:[
+          "Regions, Availability Zones, Region Pairs",
+          "Geographies, sovereign regions, data residency",
+          "Service types: IaaS, PaaS, SaaS examples"
+        ], refs:[{label:"Study guide", url:"https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900"}]},
+        { id:"arch-2", domain:"arch", title:"Core Azure services", bullets:[
+          "Compute: VMs, VMSS, Azure App Service, AKS, ACI",
+          "Storage: Standard vs Premium, redundancy (LRS/ZRS/GRS/GZRS)",
+          "Networking: VNets, subnets, NSG, VPN, ExpressRoute"
+        ], refs:[{label:"Training course", url:"https://learn.microsoft.com/training/courses/az-900t00"}]},
+        { id:"arch-3", domain:"arch", title:"Data & AI (fundamentals)", bullets:[
+          "Azure SQL family, Cosmos DB models, Azure Storage tables",
+          "Azure Synapse overview, Data Factory basics",
+          "AI services high-level: Azure AI Studio/Cognitive Services"
+        ], refs:[{label:"Learn paths", url:"https://learn.microsoft.com/training/azure/"}]},
+        { id:"gov-1", domain:"gov", title:"Identity, access & security", bullets:[
+          "Microsoft Entra ID (formerly Azure AD), tenants, subscriptions",
+          "RBAC vs Azure built-in roles, resource locks",
+          "Security Center/Defender for Cloud, Key Vault basics"
+        ], refs:[{label:"Study guide", url:"https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900"}]},
+        { id:"gov-2", domain:"gov", title:"Governance & compliance", bullets:[
+          "Management groups, subscriptions, resource groups",
+          "Azure Policy vs Blueprints (retired) -> use landing zones",
+          "Tags, cost centers, resource naming"
+        ], refs:[{label:"Official page", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}]},
+        { id:"gov-3", domain:"gov", title:"Cost management & SLAs", bullets:[
+          "Pricing calculators, TCO, Cost Management + Billing",
+          "Service-level agreements & lifecycle (GA/Preview/Retire)",
+          "Support plans (Basic/Developer/Standard/Professional Direct)"
+        ], refs:[{label:"Pricing & support", url:"https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"}]}
+      ],
+      questions:[
+        {domain:"cloud", stem:"Which statement best describes the shared responsibility model in Azure?", choices:[
+          "Microsoft secures everything in the cloud; customers configure services.",
+          "Responsibilities vary by service type (IaaS/PaaS/SaaS) between Microsoft and the customer.",
+          "Customers are always responsible for physical datacenter security.",
+          "Security is handled by your ISP."], answer:1, explain:"Responsibility shifts depending on service type; e.g., more customer control in IaaS."},
+        {domain:"arch", stem:"You need to deploy a web app quickly without managing servers. Which option fits AZ-900 scope?", choices:["Azure Functions","Azure App Service","Azure VM Scale Sets","Azure Kubernetes Service"], answer:1, explain:"App Service provides PaaS for web apps; minimal infra mgmt."},
+        {domain:"gov", stem:"What is the main purpose of Azure Policy?", choices:["Provide network isolation","Enforce organizational standards and assess compliance","Encrypt data at rest","Manage identity lifecycle"], answer:1, explain:"Azure Policy evaluates resources for compliance with defined rules."},
+        {domain:"arch", stem:"Which redundancy option replicates your data across three zones in a region?", choices:["LRS","GRS","ZRS","GZRS"], answer:2, explain:"ZRS = zone-redundant storage within a region."}
+      ]
+    };
+
+    const topicsEl = document.getElementById('topics');
+    const questionsEl = document.getElementById('questions');
+    const domainSel = document.getElementById('domain');
+    const searchInp = document.getElementById('search');
+    const resetBtn = document.getElementById('reset');
+    const quizMode = document.getElementById('quizmode');
+
+    function render(){
+      const q = (searchInp.value||'').toLowerCase();
+      const d = domainSel.value;
+      topicsEl.innerHTML = '';
+      data.topics.filter(t => (d==='all'||t.domain===d) && (t.title.toLowerCase().includes(q) || t.bullets.join(' ').toLowerCase().includes(q))).forEach(t => {
+        const div = document.createElement('div');
+        div.className='topic';
+        div.innerHTML = `<strong>${t.title}</strong><div class="muted">Domain: ${labelFor(t.domain)}</div><ul>${t.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><div>${t.refs.map(r=>`<a class="link" target="_blank" href="${r.url}">${r.label}</a>`).join(' · ')}</div>`;
+        topicsEl.appendChild(div);
+      });
+
+      questionsEl.innerHTML='';
+      data.questions.filter(x => d==='all' || x.domain===d).filter(x => x.stem.toLowerCase().includes(q) || x.choices.join(' ').toLowerCase().includes(q)).forEach((x,i)=>{
+        const div = document.createElement('div');
+        div.className='q';
+        const id = `a_${i}`;
+        div.innerHTML = `<div><strong>Q${i+1}.</strong> ${x.stem}</div>
+          <ol>${x.choices.map((c,idx)=>`<li><label><input type="radio" name="q_${i}" value="${idx}"> ${c}</label></li>`).join('')}</ol>
+          <div id="${id}" class="answer ${quizMode.checked?'hidden':''}"><span class="ok">Answer:</span> ${x.choices[x.answer]}<div class="muted">${x.explain}</div></div>`;
+        div.addEventListener('change',(ev)=>{
+          if(ev.target && ev.target.name===`q_${i}`){
+            const chosen = Number(ev.target.value);
+            const ans = document.getElementById(id);
+            ans.style.display = 'block';
+            if(chosen===x.answer){ ans.querySelector('.ok').textContent = 'Correct ✔'; ans.querySelector('.ok').className='ok'; }
+            else { ans.querySelector('.ok').textContent = 'Incorrect ✖'; ans.querySelector('.ok').className='bad'; }
+          }
+        });
+        questionsEl.appendChild(div);
+      });
+    }
+
+    function labelFor(d){ return d==='cloud'?'Describe cloud concepts': d==='arch'?'Describe Azure architecture & services':'Describe Azure management & governance';}
+
+    searchInp.addEventListener('input', render);
+    domainSel.addEventListener('change', render);
+    resetBtn.addEventListener('click', ()=>{ searchInp.value=''; domainSel.value='all'; render();});
+    quizMode.addEventListener('change', ()=>{ document.querySelectorAll('.answer').forEach(a=>a.style.display = quizMode.checked?'none':'block'); });
+
+    render();
+  </script>
+</body>
+</html>
